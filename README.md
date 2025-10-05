@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Professional Portfolio Website
 
-## Getting Started
+A modern, responsive portfolio website built with Next.js 15, TypeScript, Tailwind CSS, Framer Motion, and shadcn/ui components.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Modern Design**: Clean, professional layout with smooth animations
+- **Responsive**: Fully responsive design that works on all devices
+- **Interactive Animations**: Smooth Framer Motion animations throughout
+- **Component Library**: Built with shadcn/ui components for consistency
+- **TypeScript**: Full type safety and better development experience
+- **SEO Optimized**: Proper metadata and Open Graph tags
+- **Accessibility**: Focus management and keyboard navigation
+- **Dark Mode**: Automatic dark mode support
+
+## 📋 Sections
+
+- **Navigation**: Smooth scrolling navigation with mobile menu
+- **Hero**: Eye-catching introduction with call-to-action
+- **About**: Personal story, expertise, and statistics
+- **Projects**: Showcase of featured and additional projects
+- **Skills**: Technical skills with animated progress bars
+- **Contact**: Contact form with validation and contact information
+- **Footer**: Social links and additional navigation
+
+## 🛠️ Technologies Used
+
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS v4** - Utility-first CSS framework
+- **Framer Motion** - Animation library
+- **shadcn/ui** - Component library
+- **Lucide React** - Icon library
+
+## 🚀 Getting Started
+
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Open your browser** and navigate to `http://localhost:3000`
+
+## 📝 Customization
+
+### Personal Information
+Update the following files with your personal information:
+
+- `app/layout.tsx` - Update metadata (title, description, etc.)
+- `components/hero-section.tsx` - Update name, title, and social links
+- `components/about-section.tsx` - Update personal story and statistics
+- `components/contact-section.tsx` - Update contact information
+- `components/footer.tsx` - Update social links and contact details
+
+### Projects
+Edit `components/projects-section.tsx` to add your projects:
+
+```typescript
+const projects = [
+  {
+    title: "Your Project Name",
+    description: "Project description...",
+    technologies: ["React", "TypeScript", "Next.js"],
+    liveUrl: "https://your-project.com",
+    githubUrl: "https://github.com/yourusername/project",
+    featured: true, // Set to true for featured projects
+  },
+  // Add more projects...
+];
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Skills
+Update `components/skills-section.tsx` to reflect your skills:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```typescript
+const skillCategories = [
+  {
+    title: "Your Skill Category",
+    icon: YourIcon,
+    skills: [
+      { name: "Skill Name", level: 90 }, // Level is percentage
+    ],
+  },
+  // Add more categories...
+];
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Colors and Styling
+The color scheme can be customized in `app/globals.css`:
 
-## Learn More
+```css
+:root {
+  --primary: #3b82f6; /* Your primary color */
+  --secondary: #64748b; /* Your secondary color */
+  /* ... other colors */
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📱 Responsive Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The portfolio is fully responsive and includes:
+- Mobile-first design approach
+- Responsive navigation with hamburger menu
+- Flexible grid layouts
+- Optimized typography for all screen sizes
+- Touch-friendly interactive elements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎨 Animation Features
 
-## Deploy on Vercel
+- Smooth page transitions
+- Scroll-triggered animations
+- Hover effects on interactive elements
+- Loading animations
+- Staggered animations for lists
+- Parallax-like effects
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔧 Build and Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Build for Production
+```bash
+npm run build
+```
+
+### Start Production Server
+```bash
+npm start
+```
+
+### Deploy to Vercel
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Deploy automatically
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Support
+
+If you have any questions or need help customizing this portfolio, feel free to reach out!
+
+---
+
+**Happy coding!** 🎉
