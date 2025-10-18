@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-delta-six-ikb203y6is.vercel.app/sitemap.xml

@@ -9,6 +9,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import emailjs from '@emailjs/browser';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contactFormSchema, type ContactFormData } from "@/lib/schemas";
 
 const contactInfo = [
   {
@@ -32,26 +35,20 @@ const contactInfo = [
 ];
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitError(false);
 
@@ -62,17 +59,17 @@ export default function ContactSection() {
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
 
       const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
+        from_name: data.name,
+        from_email: data.email,
+        subject: data.subject,
+        message: data.message,
         to_email: 'fuenteblancasonny@gmail.com', // Your email
       };
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
       
       setIsSubmitted(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      reset();
       
       // Reset success state after 5 seconds
       setTimeout(() => {
@@ -232,7 +229,7 @@ export default function ContactSection() {
                     </p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -244,14 +241,13 @@ export default function ContactSection() {
                       </label>
                       <Input
                         id="name"
-                        name="name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={handleInputChange}
+                        {...register("name")}
                         placeholder="Your full name"
                         className="w-full"
                       />
+                      {errors.name && (
+                        <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+                      )}
                     </motion.div>
 
                     <motion.div
@@ -265,14 +261,14 @@ export default function ContactSection() {
                       </label>
                       <Input
                         id="email"
-                        name="email"
                         type="email"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
+                        {...register("email")}
                         placeholder="your.email@example.com"
                         className="w-full"
                       />
+                      {errors.email && (
+                        <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                      )}
                     </motion.div>
 
                     <motion.div
@@ -286,14 +282,13 @@ export default function ContactSection() {
                       </label>
                       <Input
                         id="subject"
-                        name="subject"
-                        type="text"
-                        required
-                        value={formData.subject}
-                        onChange={handleInputChange}
+                        {...register("subject")}
                         placeholder="What's this about?"
                         className="w-full"
                       />
+                      {errors.subject && (
+                        <p className="text-red-500 text-sm mt-1">{errors.subject.message}</p>
+                      )}
                     </motion.div>
 
                     <motion.div
@@ -307,13 +302,13 @@ export default function ContactSection() {
                       </label>
                       <Textarea
                         id="message"
-                        name="message"
-                        required
-                        value={formData.message}
-                        onChange={handleInputChange}
+                        {...register("message")}
                         placeholder="Tell me about your project or just say hello!"
                         className="w-full min-h-[120px]"
                       />
+                      {errors.message && (
+                        <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
+                      )}
                     </motion.div>
 
                     <motion.div

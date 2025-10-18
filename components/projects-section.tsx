@@ -4,14 +4,21 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, ArrowRight } from "lucide-react";
+import { ExternalLink, Github, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 const projects = [
   {
     title: "StayWise",
     description: "A comprehensive property management platform that revolutionizes how homeowners manage rentals and tenants find homes. Features automated rent collection, tenant screening, performance analytics, and seamless communication tools.",
-    image: "/staywise.png",
+    images: [
+      "/staywise.png",
+      "/api/placeholder/800/450",
+      "/api/placeholder/800/450",
+      "/api/placeholder/800/450",
+      "/api/placeholder/800/450"
+    ],
     technologies: ["React Router 7", "TypeScript", "React", "PostgreSQL", "Prisma", "Tailwind CSS"],
     liveUrl: "https://staywise-ten.vercel.app/",
     githubUrl: "https://github.com/fsonnyboy/staywise",
@@ -20,53 +27,55 @@ const projects = [
   {
     title: "Church Management System",
     description: "A modern church management platform designed to streamline administrative tasks, member management, and community engagement for religious organizations.",
-    image: "/church.png",
+    images: [
+      "/church.png",
+      "/api/placeholder/800/450",
+      "/api/placeholder/800/450",
+      "/api/placeholder/800/450",
+      "/api/placeholder/800/450"
+    ],
     technologies: ["Next.js", "TypeScript", "React", "PostgreSQL", "Prisma", "Tailwind CSS", "Mapbox"],
     liveUrl: "https://church-management-beta.vercel.app/",
     githubUrl: "https://github.com/fsonnyboy/church-management",
     featured: true,
   },
   {
-    title: "E-Commerce Platform",
-    description: "A full-stack e-commerce solution built with Next.js, TypeScript, and Stripe integration. Features include user authentication, product management, and secure payment processing.",
-    image: "/api/placeholder/600/400",
-    technologies: ["Next.js", "TypeScript", "Stripe", "Prisma", "PostgreSQL"],
-    liveUrl: "https://example-ecommerce.com",
-    githubUrl: "https://github.com/fsonnyboy/ecommerce-platform",
-    featured: false,
-  },
-  {
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-    image: "/api/placeholder/600/400",
-    technologies: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
-    liveUrl: "https://example-tasks.com",
-    githubUrl: "https://github.com/fsonnyboy/task-manager",
-    featured: false,
-  },
-  {
-    title: "Weather Dashboard",
-    description: "A responsive weather dashboard with location-based forecasts, interactive maps, and detailed weather analytics.",
-    image: "/api/placeholder/600/400",
-    technologies: ["Vue.js", "Chart.js", "OpenWeather API", "Tailwind CSS"],
-    liveUrl: "https://example-weather.com",
-    githubUrl: "https://github.com/fsonnyboy/weather-dashboard",
-    featured: false,
-  },
-  {
-    title: "Social Media Analytics",
-    description: "A comprehensive analytics platform for social media metrics with data visualization and reporting capabilities.",
-    image: "/api/placeholder/600/400",
-    technologies: ["React", "D3.js", "Python", "FastAPI", "Redis"],
-    liveUrl: "https://example-analytics.com",
-    githubUrl: "https://github.com/fsonnyboy/social-analytics",
-    featured: false,
+    title: "Caremeds",
+    description: "A comprehensive React Native mobile application built with Expo that provides a complete healthcare medicine management platform. The app enables users to browse, search, and request medicines through an intuitive interface with robust user authentication and permission management.",
+    images: [
+      "/caremeds-home.png", // You'll need to add these screenshots
+      "/caremeds-medicine-browse.png",
+      "/caremeds-search.png",
+      "/caremeds-request.png",
+      "/caremeds-profile.png"
+    ],
+    technologies: ["React Native", "TypeScript", "Expo", "NativeWind", "React Query", "Context API"],
+    liveUrl: null, // No live URL since not deployed to stores
+    githubUrl: "https://github.com/fsonnyboy/medcare",
+    apkUrl: "https://drive.google.com/file/d/1muJLrFVD_kePnMMQ2A4BLZsLqvyp_ncJ/view?usp=drive_link", // Google Drive link
+    projectType: "mobile",
+    featured: true,
   },
 ];
 
 export default function ProjectsSection() {
   const featuredProjects = projects.filter(project => project.featured);
   const otherProjects = projects.filter(project => !project.featured);
+  const [currentImageIndices, setCurrentImageIndices] = useState<Record<string, number>>({});
+
+  const nextImage = (projectTitle: string, totalImages: number) => {
+    setCurrentImageIndices(prev => ({
+      ...prev,
+      [projectTitle]: ((prev[projectTitle] || 0) + 1) % totalImages
+    }));
+  };
+
+  const prevImage = (projectTitle: string, totalImages: number) => {
+    setCurrentImageIndices(prev => ({
+      ...prev,
+      [projectTitle]: ((prev[projectTitle] || 0) - 1 + totalImages) % totalImages
+    }));
+  };
 
   return (
     <section id="projects" className="py-20 bg-gradient-to-br from-muted/10 via-background to-muted/20 relative overflow-hidden">
@@ -98,67 +107,138 @@ export default function ProjectsSection() {
           </p>
         </motion.div>
 
-        {/* Featured Projects */}
+        {/* Featured Projects with Individual Carousels */}
         <div className="grid lg:grid-cols-2 gap-8 mb-16">
-          {featuredProjects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-            >
-              <Card className="h-full overflow-hidden hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-muted/20 hover:from-muted/10 hover:to-background group">
-                <div className="aspect-video relative overflow-hidden">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-contain group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="text-white">
-                      <div className="text-lg font-semibold mb-1">
-                        {project.title}
-                      </div>
-                      <div className="text-sm text-white/80">
-                        Click to view project
+          {featuredProjects.map((project, index) => {
+            const currentImageIndex = currentImageIndices[project.title] || 0;
+            const projectImages = project.images;
+            
+            return (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+              >
+                <Card className="h-full overflow-hidden hover:shadow-2xl transition-all duration-300 border-0 bg-gradient-to-br from-background to-muted/20 hover:from-muted/10 hover:to-background group">
+                  {/* Project Image Carousel */}
+                  <div className="relative">
+                    {/* Main Image Display */}
+                    <motion.div
+                      key={currentImageIndex}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5 }}
+                      className="relative aspect-video overflow-hidden"
+                    >
+                      <Image
+                        src={projectImages[currentImageIndex]}
+                        alt={`${project.title} - Image ${currentImageIndex + 1}`}
+                        fill
+                        className="object-cover"
+                        priority
+                      />
+                    </motion.div>
+
+                    {/* Navigation Controls */}
+                    <div className="absolute inset-0 flex items-center justify-between pointer-events-none">
+                      {/* Previous Button */}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => prevImage(project.title, projectImages.length)}
+                        className="pointer-events-auto w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background/90 border-2 border-primary ml-4"
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                      </Button>
+
+                      {/* Next Button */}
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => nextImage(project.title, projectImages.length)}
+                        className="pointer-events-auto w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background/90 border-2 border-primary mr-4"
+                      >
+                        <ChevronRight className="h-5 w-5" />
+                      </Button>
+                    </div>
+
+                    {/* Dots Indicator */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+                      <div className="flex gap-2 bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full">
+                        {projectImages.map((_, imgIndex) => (
+                          <button
+                            key={imgIndex}
+                            onClick={() => setCurrentImageIndices(prev => ({
+                              ...prev,
+                              [project.title]: imgIndex
+                            }))}
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                              imgIndex === currentImageIndex 
+                                ? "bg-primary scale-125" 
+                                : "bg-muted hover:bg-muted-foreground/50"
+                            }`}
+                          />
+                        ))}
                       </div>
                     </div>
                   </div>
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-xl">{project.title}</CardTitle>
-                  <p className="text-muted-foreground">{project.description}</p>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex gap-2">
-                    <Button size="sm" asChild>
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Live Demo
-                      </a>
-                    </Button>
-                    <Button size="sm" variant="outline" asChild>
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4 mr-2" />
-                        Code
-                      </a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+
+                  {/* Project Details */}
+                  <CardHeader>
+                    <div className="flex items-center gap-2 mb-2">
+                      <CardTitle className="text-xl">{project.title}</CardTitle>
+                      {project.projectType === "mobile" && (
+                        <Badge variant="secondary" className="text-xs">
+                          📱 Mobile App
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-muted-foreground">{project.description}</p>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.map((tech) => (
+                        <Badge key={tech} variant="outline" className="text-xs">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex gap-2">
+                      {project.liveUrl ? (
+                        <Button size="sm" asChild>
+                          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Live Demo
+                          </a>
+                        </Button>
+                      ) : project.apkUrl ? (
+                        <Button size="sm" asChild>
+                          <a href={project.apkUrl} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Download APK
+                          </a>
+                        </Button>
+                      ) : (
+                        <Button size="sm" disabled>
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          {project.projectType === "mobile" ? "Mobile App" : "Demo Unavailable"}
+                        </Button>
+                      )}
+                      <Button size="sm" variant="outline" asChild>
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                          <Github className="h-4 w-4 mr-2" />
+                          Code
+                        </a>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Other Projects */}

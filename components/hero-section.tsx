@@ -35,15 +35,35 @@ export default function HeroSection() {
               <span className="text-sm text-muted-foreground">Available for new opportunities</span>
             </motion.div>
 
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight"
-            >
-              Sonny Boy Fuenteblanca
-            </motion.h1>
+            {/* Main Headline with Photo on Mobile */}
+            <div className="flex items-center justify-between gap-4">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight flex-1"
+              >
+                Sonny Boy Fuenteblanca
+              </motion.h1>
+              
+              {/* Mobile Photo - Only visible on mobile */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+                className="lg:hidden relative"
+              >
+                <div className="relative w-32 h-32 rounded-full overflow-hidden shadow-xl">
+                  <Image
+                    src="/Gemini_Generated_Image_5q04xj5q04xj5q04.png"
+                    alt="Sonny Boy Fuenteblanca"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </motion.div>
+            </div>
 
             {/* Subtitle */}
             <motion.h2
@@ -131,12 +151,12 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Profile Image */}
+          {/* Right Column - Desktop Profile Image */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="relative flex justify-center lg:justify-end"
+            className="relative justify-center lg:justify-end hidden lg:flex"
           >
             <div className="relative">
               {/* Main Profile Image */}
