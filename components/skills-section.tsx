@@ -3,44 +3,69 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Code, 
-  Database, 
-  Cloud, 
-  Smartphone, 
-  Palette, 
+import {
+  Code,
+  Database,
+  Smartphone,
   Server,
-  Globe,
-  Zap
+  Wrench,
+  Zap,
 } from "lucide-react";
 
 const skillCategories = [
   {
-    title: "Frontend Development",
+    title: "Frontend",
     icon: Code,
     color: "text-blue-500",
     bgColor: "bg-blue-500/10",
     skills: [
-      { name: "React.js", level: 95 },
-      { name: "Next.js", level: 90 },
-      { name: "TypeScript", level: 88 },
-      { name: "JavaScript", level: 92 },
-      { name: "HTML/CSS", level: 95 },
-      { name: "React Native", level: 85 },
+      { name: "React 19", level: 95 },
+      { name: "Next.js 15", level: 92 },
+      { name: "TypeScript", level: 90 },
+      { name: "Tailwind CSS", level: 92 },
+      { name: "React Router", level: 88 },
+      { name: "Framer Motion", level: 85 },
     ],
   },
   {
-    title: "Backend Development",
+    title: "Backend",
     icon: Server,
     color: "text-green-500",
     bgColor: "bg-green-500/10",
     skills: [
-      { name: "NestJS", level: 88 },
-      { name: "Express.js", level: 90 },
       { name: "Node.js", level: 92 },
-      { name: "REST APIs", level: 90 },
-      { name: "GraphQL", level: 75 },
-      { name: "AI Automation", level: 80 },
+      { name: "NestJS", level: 90 },
+      { name: "Express.js", level: 88 },
+      { name: "Prisma ORM", level: 90 },
+      { name: "PostgreSQL", level: 90 },
+      { name: "Redis", level: 85 },
+    ],
+  },
+  {
+    title: "Mobile",
+    icon: Smartphone,
+    color: "text-pink-500",
+    bgColor: "bg-pink-500/10",
+    skills: [
+      { name: "React Native", level: 88 },
+      { name: "Expo", level: 88 },
+      { name: "Recoil", level: 82 },
+      { name: "React Query", level: 88 },
+      { name: "NativeWind", level: 85 },
+    ],
+  },
+  {
+    title: "Tools & DevOps",
+    icon: Wrench,
+    color: "text-orange-500",
+    bgColor: "bg-orange-500/10",
+    skills: [
+      { name: "Git", level: 92 },
+      { name: "Vercel", level: 88 },
+      { name: "REST APIs", level: 92 },
+      { name: "JWT", level: 88 },
+      { name: "bcrypt", level: 85 },
+      { name: "Expo Secure Store", level: 82 },
     ],
   },
   {
@@ -51,56 +76,30 @@ const skillCategories = [
     skills: [
       { name: "PostgreSQL", level: 90 },
       { name: "Redis", level: 85 },
-      { name: "MongoDB", level: 80 },
-      { name: "Prisma", level: 82 },
-      { name: "MySQL", level: 78 },
-      { name: "Firebase", level: 70 },
+      { name: "Prisma", level: 90 },
+      { name: "AsyncStorage", level: 82 },
+      { name: "Expo Secure Store", level: 82 },
     ],
   },
   {
-    title: "Mobile Development",
-    icon: Smartphone,
-    color: "text-pink-500",
-    bgColor: "bg-pink-500/10",
-    skills: [
-      { name: "React Native", level: 85 },
-      { name: "Cross-platform", level: 88 },
-      { name: "Mobile UI/UX", level: 82 },
-      { name: "App Store", level: 75 },
-      { name: "Play Store", level: 75 },
-    ],
-  },
-  {
-    title: "Cloud & DevOps",
-    icon: Cloud,
-    color: "text-orange-500",
-    bgColor: "bg-orange-500/10",
-    skills: [
-      { name: "Docker", level: 80 },
-      { name: "CI/CD", level: 78 },
-      { name: "Vercel", level: 85 },
-      { name: "Git", level: 90 },
-      { name: "Deployment", level: 85 },
-    ],
-  },
-  {
-    title: "AI & Automation",
+    title: "Other",
     icon: Zap,
     color: "text-indigo-500",
     bgColor: "bg-indigo-500/10",
     skills: [
-      { name: "AI Integration", level: 80 },
-      { name: "Workflow Automation", level: 85 },
-      { name: "Performance Optimization", level: 88 },
-      { name: "Intelligent APIs", level: 82 },
+      { name: "Agile", level: 90 },
+      { name: "CI/CD", level: 82 },
+      { name: "AI Automation", level: 85 },
+      { name: "Performance Optimization", level: 90 },
     ],
   },
 ];
 
 const technologies = [
-  "React.js", "Next.js", "TypeScript", "NestJS", "Express.js", "PostgreSQL",
-  "Redis", "React Native", "Node.js", "N8n", "Prisma", "Docker",
-  "Git", "Tailwind CSS", "Framer Motion", "GraphQL"
+  "React 19", "Next.js 15", "TypeScript", "NestJS", "Express.js", "Node.js",
+  "PostgreSQL", "Redis", "Prisma ORM", "React Native", "Expo", "Recoil",
+  "React Query", "NativeWind", "Tailwind CSS", "Framer Motion", "JWT", "bcrypt",
+  "REST APIs", "Vercel", "Git", "AI Automation",
 ];
 
 export default function SkillsSection() {
