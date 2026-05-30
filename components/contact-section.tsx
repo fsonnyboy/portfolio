@@ -23,8 +23,8 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    value: "+63 991 858 9679",
-    href: "tel:+639918589679",
+    value: "+63 963 568 8439",
+    href: "tel:+639635688439",
   },
   {
     icon: MapPin,

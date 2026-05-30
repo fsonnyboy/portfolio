@@ -79,8 +79,8 @@ export default function Navigation() {
               <Button
                 onClick={() => {
                   const link = document.createElement('a');
-                  link.href = '/cv/Sonny_Boy_Fuenteblanca_CV.pdf';
-                  link.download = 'Sonny_Boy_Fuenteblanca_CV.pdf';
+                  link.href = '/cv/Sonny_Boy_Fuenteblanca_Resume.pdf';
+                  link.download = 'Sonny_Boy_Fuenteblanca_Resume.pdf';
                   document.body.appendChild(link);
                   link.click();
                   document.body.removeChild(link);
