@@ -30,10 +30,10 @@ const expertise = [
 ];
 
 const stats = [
-  { label: "Years Experience", value: "2+" },
-  { label: "Projects Completed", value: "10+" },
-  { label: "Technologies Used", value: "10+" },
-  { label: "Mobile Apps Built", value: "5+" },
+  { label: "Years Experience", value: "3+" },
+  { label: "Projects Completed", value: "6+" },
+  { label: "Technologies Used", value: "15+" },
+  { label: "Mobile Apps Built", value: "2+" },
 ];
 
 export default function AboutSection() {
@@ -63,10 +63,10 @@ export default function AboutSection() {
             </span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            With hands-on experience in both frontend and backend development, I specialize in 
-            building scalable web and mobile applications. Starting as a Junior Frontend Developer 
-            and progressing to Associate Software Engineer, I've expanded my expertise across the 
-            full technology stack.
+            Full Stack Developer specializing in React, Next.js, NestJS, and PostgreSQL. I've grown
+            from Junior Frontend Developer to Full Stack roles across 3 companies, building everything
+            from Filipino mental health platforms to music industry SaaS — with a proven track record
+            of improving API performance by up to 80% through Redis caching and distributed systems.
           </p>
         </motion.div>
 
